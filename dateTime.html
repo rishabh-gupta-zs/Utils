@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Time_Date</title>
+    <style>
+        body {
+            font-family: monospace;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 90vh;
+            background-color: black;
+            color: white;
+        }
+
+        #timer {
+            display: flex;
+            gap: 20px;
+        }
+
+        .space {
+            width: 20px;
+        }
+        .label_y::before{content: "Y";color: red; position: relative; top: 27px;right: 5px; font-size: 1.1rem;border-bottom: 2px solid red;}
+        .label_m::before{content: "M";color: red; position: relative; top: 27px;right: 5px; font-size: 1.1rem;border-bottom: 2px solid red;}
+        .label_d::before{content: "D";color: red; position: relative; top: 27px;right: 5px; font-size: 1.1rem;border-bottom: 2px solid red;}
+
+        #timer .container {
+            height: 120px;
+            width: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #timer .label {
+            height: 110px;
+            width: 110px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+        }
+
+        #timer .value {
+            font-size: 4rem;
+            border-bottom: 2px solid red;
+        }
+
+        @media only screen and (max-width: 920px) {
+            #timer .container {
+                height: 80px;
+                width: 80px;
+            }
+
+            #timer .label {
+                height: 70px;
+                width: 70px;
+            }
+
+            #timer .value {
+                font-size: 2.5rem;
+            }
+
+            .space {
+                width: 10px;
+            }
+            .label_y::before{top: 14px;}
+            .label_m::before{top: 14px;}
+            .label_d::before{top: 14px;}
+        }
+
+        @media only screen and (max-width: 630px) {
+            #timer .container {
+                height: 60px;
+                width: 60px;
+            }
+
+            #timer .label {
+                height: 50px;
+                width: 50px;
+            }
+
+            #timer .value {
+                font-size: 2rem;
+            }
+
+            .space {
+                width: 5px;
+            }
+            .label_y::before{top: 8px;}
+            .label_m::before{top: 8px;}
+            .label_d::before{top: 8px;}
+        }
+
+        @media only screen and (max-width: 520px) {
+            #timer .container {
+                height: 50px;
+                width: 50px;
+            }
+
+            #timer .label {
+                height: 40px;
+                width: 40px;
+            }
+
+            #timer .value {
+                font-size: 1.2rem;
+            }
+
+            .space {
+                width: 5px;
+            }
+            .label_y::before{top: 1px;}
+            .label_m::before{top: 1px;}
+            .label_d::before{top: 1px;}
+        }
+    </style>
+</head>
+
+<body>
+    <div id="timer"></div>
+    <script>
+      function updateTimer() {
+    const now = new Date();
+    let years = now.getFullYear()-2000;
+    let months = now.getMonth();
+    let days = now.getDate();
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+    const text = `
+    <div class="container">   <span class="label label_y"><span class="value">${years}</span> </span></div>
+    <div class="container">   <span class="label label_m"><span class="value">${months}</span> </span></div>
+    <div class="container">   <span class="label label_d"><span class="value">${days}</span> </span></div>
+    <div class="space"></div>
+    <div style="background: conic-gradient( #f00, ${(hours   / 24) * 360}deg, #000, ${(hours   / 24) * 360}deg, #000);" class="container">   <span class="label"> <span class="value" style="border: none;">${hours.toString().padStart(2, '0')}</span> </span></div>
+    <div style="background: conic-gradient( #f00, ${(minutes / 60) * 360}deg, #000, ${(minutes / 60) * 360}deg, #000);" class="container">   <span class="label"> <span class="value" style="border: none;">${minutes.toString().padStart(2, '0')}</span> </span></div>
+    <div style="background: conic-gradient( #f00, ${(seconds / 60) * 360}deg, #000, ${(seconds / 60) * 360}deg, #000);" class="container">   <span class="label"> <span class="value" style="border: none;">${seconds.toString().padStart(2, '0')}</span> </span></div>`
+    document.getElementById('timer').innerHTML = text;
+} updateTimer();
+setInterval(updateTimer, 1000);
+    </script>
+</body>
+
+</html>
